@@ -12,10 +12,9 @@ import {
 import { axiosGetRequest } from '@/app/utils/axiosGetRequest';
 import validateURL from './utils/validateURL';
 import { useErrorToast } from '@/app/hooks/useErrorToast';
+import useChannelQueryString from './hooks/useChannelQueryString'; // Update the path to your hook
 
 export const SearchInput = () => {
-  const showErrorToast = useErrorToast();
-
   //Input data
   const [URLInput, setURLInput] = useState<string>('');
   const [inputError, setInputError] = useState(false);
@@ -25,11 +24,17 @@ export const SearchInput = () => {
   const [error, setError] = useState<Error | null>(null);
   const [channelData, setChannelData] = useState<Channel | null>(null);
 
+  const showErrorToast = useErrorToast();
+
+  // Updating the URL with the proper channelId slug
+  const { createQueryString } = useChannelQueryString(channelData);
+
   // Handling inputs and query
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setURLInput(event.target.value);
     setInputError(false);
   };
+
   const handleQuery = async () => {
     const username = validateURL(URLInput);
 
@@ -43,7 +48,7 @@ export const SearchInput = () => {
     setLoading(true);
 
     try {
-      const endpoint = `/channels?forUsername=${URLInput}`;
+      const endpoint = `/search?part=snippet&type=channel&q=@${username}`;
 
       const {
         loading: loadingResponse,
@@ -54,7 +59,14 @@ export const SearchInput = () => {
         endpoint,
       });
 
-      setChannelData(responseData);
+      if (responseData && responseData.pageInfo.totalResults) {
+        setChannelData(responseData?.items[0]);
+      } else {
+        showErrorToast(
+          'There was an error fetching the data, or the channel does not exist'
+        );
+      }
+
       setLoading(loadingResponse);
       setError(errors as Error | null);
     } catch (err) {
@@ -67,11 +79,6 @@ export const SearchInput = () => {
   if (error) {
     return <>oops, an error has occurred</>;
   }
-
-  if (loading) {
-    return <Spinner />;
-  }
-
   return (
     <InputGroup size='lg'>
       <Input
@@ -84,7 +91,12 @@ export const SearchInput = () => {
         errorBorderColor='crimson'
       />
       <InputRightElement width='4.5rem'>
-        <Button size='lg' onClick={handleQuery} variant={'ghost'}>
+        <Button
+          size='lg'
+          onClick={handleQuery}
+          variant={'ghost'}
+          isLoading={loading}
+        >
           {' '}
           Send
         </Button>
