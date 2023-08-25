@@ -5,14 +5,15 @@ import { useSearchParams } from 'next/navigation';
 const useVideoData = () => {
   const searchParams = useSearchParams();
   const channelId = searchParams.get('channelId');
+  const uploadsId = channelId?.slice(0, 1) + 'U' + channelId?.slice(2);
 
   const [loading, setLoading] = useState(true);
-  const [videoData, setVideoData] = useState<[Video] | []>([]);
+  const [videoIds, setVideoIds] = useState<string>('');
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    const fetchVideoData = async () => {
-      const endpoint = `/search?channelId=${channelId}&part=snippet,id&order=date&maxResults=50`;
+    const fetchVideoIds = async () => {
+      const endpoint = `/playlistItems?playlistId=${uploadsId}&part=snippet&maxResults=50`;
 
       try {
         const {
@@ -25,7 +26,10 @@ const useVideoData = () => {
         });
 
         if (responseData) {
-          setVideoData(responseData.items);
+          const ids = responseData.items
+            .map((item: any) => item.snippet.resourceId.videoId)
+            .join(',');
+          setVideoIds(ids);
         }
         setLoading(loadingResponse);
         setError(errors as Error | null);
@@ -37,11 +41,11 @@ const useVideoData = () => {
     };
 
     if (channelId) {
-      fetchVideoData();
+      fetchVideoIds();
     }
   }, [channelId]);
 
-  return { loading, videoData, error };
+  return { loading, videoIds, error };
 };
 
 export default useVideoData;
