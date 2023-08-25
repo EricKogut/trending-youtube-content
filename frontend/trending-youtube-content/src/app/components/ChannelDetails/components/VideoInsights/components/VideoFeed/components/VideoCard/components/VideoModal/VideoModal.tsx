@@ -4,14 +4,11 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   useDisclosure,
   Button,
   createIcon,
+  Link,
 } from '@chakra-ui/react';
-
 interface VideoModalProps {
   videoId: string;
 }
