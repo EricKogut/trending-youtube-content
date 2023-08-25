@@ -1,10 +1,11 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Search } from './components/Search';
 
 import { useSearchParams } from 'next/navigation';
 import { CustomMotionDiv } from '@/app/components/common/CustomMotionDiv';
 import { Blur } from './components/common/Blur';
+import { ChannelDetails } from './components/ChannelDetails/ChannelDetails';
 
 const Home = () => {
   const searchParams = useSearchParams();
@@ -29,7 +30,7 @@ const Home = () => {
         rotate={'45deg'}
       />
       <CustomMotionDiv showPage={hasChannelId}>
-        another awesome component
+        <ChannelDetails />
       </CustomMotionDiv>
       <CustomMotionDiv showPage={!hasChannelId}>
         <Search />

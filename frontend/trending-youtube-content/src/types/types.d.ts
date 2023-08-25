@@ -10,7 +10,12 @@ interface Thumbnails {
   };
 }
 
-interface Snippet {
+interface Localized {
+  title: string;
+  description: string;
+}
+
+interface SnippetBase {
   publishedAt: string;
   channelId: string;
   title: string;
@@ -18,7 +23,25 @@ interface Snippet {
   thumbnails: Thumbnails;
   channelTitle: string;
   liveBroadcastContent: string;
+  tags: string[];
+  categoryId: string;
+  localized: Localized;
+}
+
+interface ChannelSnippet extends SnippetBase {
   publishTime: string;
+  defaultLanguage: string;
+  defaultAudioLanguage: string;
+}
+
+interface VideoSnippet extends SnippetBase {}
+
+interface Statistics {
+  viewCount: string;
+  likeCount: string;
+  dislikeCount: string;
+  favoriteCount: string;
+  commentCount: string;
 }
 
 interface Channel {
@@ -28,5 +51,72 @@ interface Channel {
     kind: string;
     channelId: string;
   };
-  snippet: Snippet;
+  snippet: ChannelSnippet;
+  contentDetails: {
+    relatedPlaylists: {
+      likes: string;
+      favorites: string;
+      uploads: string;
+    };
+    googlePlusUserId: string;
+  };
+  statistics: {
+    viewCount: string;
+    commentCount: string;
+    subscriberCount: string;
+    hiddenSubscriberCount: boolean;
+    videoCount: string;
+  };
+  brandingSettings: {
+    channel: {
+      title: string;
+      description: string;
+      keywords: string;
+      defaultTab: string;
+      trackingAnalyticsAccountId: string;
+      moderateComments: boolean;
+      showRelatedChannels: boolean;
+      showBrowseView: boolean;
+      featuredChannelsTitle: string;
+      featuredChannelsUrls: string[];
+      unsubscribedTrailer: string;
+      profileColor: string;
+      defaultLanguage: string;
+      country: string;
+    };
+    image: {
+      bannerImageUrl: string;
+      bannerMobileImageUrl: string;
+      watchIconImageUrl: string;
+      trackingImageUrl: string;
+      bannerTabletLowImageUrl: string;
+      bannerTabletImageUrl: string;
+      bannerTabletHdImageUrl: string;
+      bannerTabletExtraHdImageUrl: string;
+      bannerMobileLowImageUrl: string;
+      bannerMobileMediumHdImageUrl: string;
+      bannerMobileHdImageUrl: string;
+      bannerMobileExtraHdImageUrl: string;
+      bannerTvImageUrl: string;
+      bannerTvLowImageUrl: string;
+      bannerTvMediumImageUrl: string;
+      bannerTvHighImageUrl: string;
+      bannerTvExtraHdImageUrl: string;
+    };
+  };
+  contentOwnerDetails: {
+    contentOwner: string;
+    timeLinked: string;
+  };
+  localizations: {
+    [key: string]: Localized;
+  };
+}
+
+interface Video {
+  kind: string;
+  etag: string;
+  id: string;
+  snippet: VideoSnippet;
+  statistics: Statistics;
 }
