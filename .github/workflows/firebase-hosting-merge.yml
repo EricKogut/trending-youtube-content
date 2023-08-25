@@ -11,6 +11,7 @@ jobs:
       - name: Build Frontend
         working-directory: frontend/trending-youtube-content
         run: |
+          echo "NEXT_PUBLIC_YOUTUBE_API_KEY=${{ secrets.NEXT_PUBLIC_YOUTUBE_API_KEY }}" >> .env.local
           npm ci
           npm run build
       - name: Deploy to Firebase Hosting
