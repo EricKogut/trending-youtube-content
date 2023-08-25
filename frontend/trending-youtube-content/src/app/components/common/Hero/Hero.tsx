@@ -6,7 +6,7 @@ interface HeroProps {
   secondaryText?: string | undefined;
 }
 
-export const Hero: React.FC<HeroProps> = ({ primaryText, secondaryText }) => {
+export const Hero = ({ primaryText, secondaryText }: HeroProps) => {
   return (
     <Box>
       <Heading

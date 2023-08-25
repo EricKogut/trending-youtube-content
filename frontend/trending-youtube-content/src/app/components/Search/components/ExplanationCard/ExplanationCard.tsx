@@ -24,8 +24,8 @@ export const ExplanationCard = () => {
         textAlign={'left'}
         justifyContent={'space-between'}
       >
-        <chakra.p fontWeight={'medium'} fontSize={'15px'} pb={4}>
-          Learn about your favourite content creators,
+        <chakra.p fontWeight={'medium'} fontSize={'15px'} pt={3} pr={2}>
+          Learn about your favourite content creators
         </chakra.p>
         <AvatarGroup size='md' max={3}>
           <Avatar

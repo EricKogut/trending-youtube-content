@@ -83,7 +83,7 @@ export const SearchInput = () => {
     <InputGroup size='lg'>
       <Input
         pr='4.5rem'
-        placeholder='Enter the channel URL'
+        placeholder='Channel URL     ie. https://www.youtube.com/@name'
         maxWidth='40rem'
         onChange={handleChange}
         boxShadow={'lg'}

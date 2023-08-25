@@ -54,7 +54,7 @@ export const VideoInsights = () => {
         isChecked={sortByRecent}
         onChange={() => setSortByRecent(!sortByRecent)}
       >
-        Sort by {sortByRecent ? 'Most Recent' : 'Most Viral'}
+        Switch to {sortByRecent ? 'Most Viral' : 'Most Recent'}
       </Switch>
       <Box as={Card} maxW='7xl' mt={4} p={4} background={'white'}>
         <VideoFeed videos={videosWithPercentageDifference} />

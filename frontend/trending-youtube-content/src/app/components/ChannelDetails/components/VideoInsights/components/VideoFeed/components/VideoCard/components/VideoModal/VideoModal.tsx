@@ -1,3 +1,4 @@
+import { CacheProvider } from '@chakra-ui/next-js';
 import {
   Modal,
   ModalOverlay,
@@ -14,6 +15,8 @@ import {
 interface VideoModalProps {
   videoId: string;
 }
+
+import { CommentsFeed } from './components/CommentsFeed';
 
 export const VideoModal = ({ videoId }: VideoModalProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -34,19 +37,18 @@ export const VideoModal = ({ videoId }: VideoModalProps) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Video Comments</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>The video Id is {videoId}</ModalBody>
-
-          <ModalFooter>
-            <Button
-              bgGradient='linear(to-l, gradientStart, gradientEnd, gradientStart, gradientEnd)'
-              bgClip='text'
-              mr={3}
-              onClick={onClose}
-            >
-              Close
-            </Button>
-          </ModalFooter>
+          <Button
+            position='fixed'
+            top='5rem'
+            right='5rem'
+            zIndex='1'
+            bgGradient='linear(to-l, gradientStart, gradientEnd, gradientStart, gradientEnd)'
+            bgClip='text'
+            onClick={onClose}
+          >
+            Close
+          </Button>
+          <CommentsFeed videoId={videoId} />
         </ModalContent>
       </Modal>
     </>
