@@ -39,10 +39,9 @@ export const CommentResponse = ({ videoComment }: any) => {
         justifyContent={'space-between'}
         position={'relative'}
       >
-        <Button>Like</Button>
-
-        <Button>Share</Button>
-        <Button>Report</Button>
+        <Button variant={'outline'}>Like</Button>
+        <Button variant={'outline'}>Share</Button>
+        <Button variant={'outline'}>Report</Button>
       </Flex>
     </Stack>
   );
