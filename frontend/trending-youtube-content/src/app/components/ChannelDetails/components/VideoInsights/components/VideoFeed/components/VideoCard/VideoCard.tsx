@@ -11,6 +11,7 @@ import {
   StatHelpText,
   StatArrow,
 } from '@chakra-ui/react';
+import { VideoModal } from './components/VideoModal';
 
 interface VideoCardProps {
   video: Video;
@@ -58,6 +59,7 @@ export const VideoCard = ({ video }: VideoCardProps) => {
           )}
         </Stat>
       </StatGroup>
+      <VideoModal videoId={video.id} />
     </Box>
   );
 };
