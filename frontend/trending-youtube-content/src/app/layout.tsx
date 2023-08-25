@@ -8,6 +8,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
+      <title>Trending Youtube Content</title>
       <body>
         <Providers>{children}</Providers>
       </body>
