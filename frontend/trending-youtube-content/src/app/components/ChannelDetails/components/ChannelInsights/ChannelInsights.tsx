@@ -67,7 +67,7 @@ export const ChannelInsights = () => {
         <GridItem colSpan={1}>
           <Flex>
             <Stack spacing={4} as={Container} textAlign={'center'} mt={12}>
-              <Text color={'gray.600'} fontSize={'xl'}>
+              <Text color={'gray.600'} fontSize={'xl'} noOfLines={12}>
                 {'"'}
                 {channelData?.snippet.description}
                 {'"'}
