@@ -118,6 +118,8 @@ interface Video {
   kind: string;
   etag: string;
   id: string;
+  likeToViewRatio: number;
+  percentageDifference: number;
   snippet: VideoSnippet;
   statistics: Statistics;
 }
