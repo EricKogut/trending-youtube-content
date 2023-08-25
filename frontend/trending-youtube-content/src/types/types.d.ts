@@ -32,6 +32,7 @@ interface ChannelSnippet extends SnippetBase {
   publishTime: string;
   defaultLanguage: string;
   defaultAudioLanguage: string;
+  customUrl: string;
 }
 
 interface VideoSnippet extends SnippetBase {}

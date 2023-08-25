@@ -10,10 +10,10 @@ export const CustomMotionDiv: React.FC<CustomMotionDivProps> = ({
   showPage,
   children,
 }) => {
-  return (
+  return showPage ? (
     <motion.div
       initial='hidden'
-      animate={showPage ? 'visible' : 'hidden'}
+      animate='visible'
       variants={{
         hidden: {
           y: -20,
@@ -31,7 +31,7 @@ export const CustomMotionDiv: React.FC<CustomMotionDivProps> = ({
     >
       {children}
     </motion.div>
-  );
+  ) : null;
 };
 
 export default CustomMotionDiv;

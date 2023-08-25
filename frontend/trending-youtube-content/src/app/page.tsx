@@ -29,11 +29,12 @@ const Home = () => {
         style={{ filter: 'blur(100px)' }}
         rotate={'45deg'}
       />
-      <CustomMotionDiv showPage={hasChannelId}>
-        <ChannelDetails />
-      </CustomMotionDiv>
+
       <CustomMotionDiv showPage={!hasChannelId}>
         <Search />
+      </CustomMotionDiv>
+      <CustomMotionDiv showPage={hasChannelId}>
+        <ChannelDetails />
       </CustomMotionDiv>
     </>
   );
